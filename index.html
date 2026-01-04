@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Makkah Cars - Hujj & Umrah Taxi</title>
+    <link rel="icon" id="favicon" href="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=32&h=32&q=80" type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* --- DESIGN SETTINGS --- */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body { background-color: #000; color: #fff; overflow-x: hidden; }
+
+
+
+        /* --- NAVBAR --- */
+
+        .navbar {
+
+            display: flex; justify-content: space-between; align-items: center;
+
+            padding: 10px 8%; background: #000; border-bottom: 2px solid #D4AF37;
+
+            position: sticky; top: 0; z-index: 1000;
+
+        }
+
+        .logo { font-size: 26px; font-weight: 800; color: #D4AF37; text-decoration: none; letter-spacing: 1px; }
+
+        .logo span { color: #fff; }
+
+
+
+        .nav-links { display: flex; }
+
+        .nav-links a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: 500; transition: 0.3s; }
+
+        .nav-links a:hover { color: #D4AF37; }
+
+
+
+        .login-btn {
+
+            background: #D4AF37; color: #000; border: none; padding: 8px 25px;
+
+            border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s;
+
+            text-decoration: none; font-size: 14px;
+
+        }
+
+
+
+        /* Hamburger Menu */
+        .hamburger { display: none; flex-direction: column; cursor: pointer; }
+        .hamburger div { width: 25px; height: 3px; background: #fff; margin: 3px 0; transition: 0.3s; }
+        .mobile-menu { position: fixed; top: 50px; right: -50%; width: 50%; height: calc(100vh - 50px); background: #000; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 20px; border-left: 1px solid #D4AF37; transition: right 0.3s; z-index: 1001; }
+        .mobile-menu.open { right: 0; }
+        .mobile-menu a { color: #fff; text-decoration: none; margin: 10px 0; font-weight: 500; transition: 0.3s; text-align: center; }
+        .mobile-menu a:hover { color: #D4AF37; }
+
+        #main-content { transition: transform 0.3s; }
+        #main-content.slide-up { transform: translateY(-20%); }
+
+
+        /* --- HERO SECTION --- */
+
+        .hero {
+
+            height: 90vh;
+
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), 
+
+                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');
+
+            background-size: cover; background-position: center;
+
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+
+        }
+
+
+
+        .hero-main-title {
+
+            font-size: clamp(32px, 6vw, 55px);
+
+            color: #D4AF37; text-transform: uppercase; font-weight: 800;
+
+            margin-bottom: 30px; letter-spacing: 3px;
+
+        }
+
+
+
+        /* --- GLASSY SEARCH BAR --- */
+
+        .search-container {
+
+            background: rgba(255, 255, 255, 0.1); 
+
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
+
+            border: 1px solid rgba(212, 175, 55, 0.4); 
+
+            padding: 35px; border-radius: 20px;
+
+            display: flex; flex-wrap: wrap; gap: 20px;
+
+            justify-content: center; align-items: flex-end;
+
+            width: 90%; max-width: 1100px;
+
+        }
+
+
+
+        .input-group { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+
+        .input-group label { color: #D4AF37; font-weight: bold; font-size: 12px; letter-spacing: 1px; }
+
+        
+
+        .input-group select, .input-group input {
+
+            padding: 14px; border-radius: 8px; border: none; width: 280px; 
+
+            background: rgba(255, 255, 255, 0.95); outline: none; color: #333;
+
+            font-size: 14px; font-weight: 500;
+
+        }
+
+
+
+        .search-btn {
+
+            background: #D4AF37; color: #000; border: none; padding: 14px 40px;
+
+            border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s;
+
+            text-transform: uppercase; font-size: 14px;
+
+        }
+
+
+
+        /* --- CARDS GRID --- */
+
+        .services-section { padding: 80px 8%; text-align: center; }
+
+        .services-title { color: #D4AF37; font-size: 40px; margin-bottom: 50px; text-transform: uppercase; font-weight: 800; }
+
+        
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; }
+
+
+
+        .service-card {
+
+            background: #111; border: 1px solid #333; padding: 25px;
+
+            border-radius: 15px; transition: 0.4s; text-align: left;
+
+        }
+
+        .service-card:hover { border-color: #D4AF37; transform: translateY(-10px); }
+
+        
+
+        .service-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; }
+
+        .service-card h3 { color: #fff; font-size: 22px; margin-bottom: 5px; }
+
+        .route-info { color: #D4AF37; font-size: 13px; font-weight: 600; margin-bottom: 15px; display: block; }
+
+        
+
+        .price-box { font-size: 28px; font-weight: 800; color: #fff; margin: 15px 0; }
+
+        .price-box span { color: #D4AF37; font-size: 18px; margin-left: 5px; }
+
+
+
+        .features { display: flex; gap: 15px; margin-bottom: 20px; font-size: 14px; color: #bbb; }
+
+
+
+        .book-btn { 
+
+            background: #25D366; color: #fff; border: none; width: 100%; 
+
+            padding: 14px; font-weight: bold; cursor: pointer; border-radius: 8px;
+
+            transition: 0.3s; text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 10px;
+
+        }
+
+        .book-btn:hover { background: #1da851; }
+
+        .check-details-btn {
+            background: #D4AF37; color: #000; border: none; width: 100%;
+            padding: 14px; font-weight: bold; cursor: pointer; border-radius: 8px;
+            text-decoration: none; display: inline-block; text-align: center; margin-top: 10px;
+            transition: 0.3s;
+        }
+        .check-details-btn:hover { background: #b8952a; }
+
+
+
+        /* --- FLOATING WHATSAPP --- */
+
+        .float-wa { 
+
+            position: fixed; bottom: 30px; right: 30px; background: #25D366; 
+
+            width: 60px; height: 60px; border-radius: 50%; display: flex; 
+
+            justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 1000; 
+
+        }
+
+
+
+        .date-hint {
+            display: none;
+            color: #666;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+
+            .search-container { flex-direction: column; align-items: stretch; }
+
+            .input-group select, .input-group input { width: 100%; }
+
+            .nav-links { display: none; }
+
+            .login-btn { display: none; }
+
+            .hamburger { display: flex; }
+
+            .date-hint { display: block; }
+
+            /* Ensure date input placeholder is visible on mobile */
+            .input-group input[type="date"]::placeholder {
+                color: #666 !important;
+                opacity: 1 !important;
+            }
+
+            .input-group input[type="date"]::-webkit-input-placeholder {
+                color: #666 !important;
+                opacity: 1 !important;
+            }
+
+            .input-group input[type="date"]::-moz-placeholder {
+                color: #666 !important;
+                opacity: 1 !important;
+            }
+
+            .input-group input[type="date"]:-ms-input-placeholder {
+                color: #666 !important;
+                opacity: 1 !important;
+            }
+
+            .input-group input[type="date"]:-moz-placeholder {
+                color: #666 !important;
+                opacity: 1 !important;
+            }
+
+            .date-hint {
+                color: #000 !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="logo">MAKKAH<span>CARS</span></a>
+        <nav class="nav-links">
+            <a href="index.html" style="color:#D4AF37;">Home</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="fleet.html">Our Fleet</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <a href="login.html" class="login-btn">Login</a>
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="mobile-menu">
+            <a href="index.html">Home</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="fleet.html">Our Fleet</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="login.html">Login</a>
+        </div>
+    </header>
+
+
+
+    <div id="main-content">
+    <section class="hero">
+
+        <h1 class="hero-main-title">Premium Chauffeur Service</h1>
+
+        
+
+        <div class="search-container">
+
+            <div class="input-group">
+
+                <label>PICKUP & DROP ROUTE</label>
+
+                <select id="userRoute" onchange="loadCarsOnline()">
+
+    <option value="Jeddah Airport to Makkah Hotel">Jeddah Airport to Makkah Hotel</option>
+
+    <option value="Makkah Hotel to Jeddah Airport">Makkah Hotel to Jeddah Airport</option>
+
+    <option value="Makkah Hotel to Madina Hotel">Makkah Hotel to Madina Hotel</option>
+
+    <option value="Madina Hotel to Makkah Hotel">Madina Hotel to Makkah Hotel</option>
+
+    <option value="Madina Airport to Madina Hotel">Madina Airport to Madina Hotel</option>
+
+    <option value="Madina Hotel to Madina Airport">Madina Hotel to Madina Airport</option>
+
+    <option value="Makkah Ziyarat">Makkah Ziyarat</option>
+
+    <option value="Madina Ziyarat">Madina Ziyarat</option>
+
+    <option value="Jeddah Airport to Madina Hotel">Jeddah Airport to Madina Hotel</option>
+
+    <option value="Jeddah to Taif & Return">Jeddah to Taif & Return</option>
+
+    <option value="Makkah to Taif & Return (Taif Ziyarat)">Makkah to Taif & Return (Taif Ziyarat)</option>
+
+    <option value="Jeddah Airport to Jeddah Hotel">Jeddah Airport to Jeddah Hotel</option>
+
+    <option value="Hotel to Train Station">Hotel to Train Station</option>
+
+    <option value="Train Station to Hotel">Train Station to Hotel</option>
+
+</select>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>PICKUP DATE</label>
+
+                <input type="date" id="bookDate" placeholder="mm/dd/yyyy">
+
+            </div>
+
+            <button class="search-btn" onclick="renderCars()">SEARCH CAR</button>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="services-section">
+
+        <h2 class="services-title">Available Fleet</h2>
+
+        <div class="services-grid" id="carDisplayArea">
+
+            </div>
+
+    </section>
+
+
+
+    <a id="waFloatingBtn" href="#" target="_blank" class="float-wa">
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35">
+
+    </a>
+
+    <footer style="background: #000; border-top: 2px solid #D4AF37; padding: 60px 8% 30px; margin-top: 50px; color: #fff; clear: both;">
+
+    
+
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto;">
+
+        
+
+        <div style="flex: 1; min-width: 280px;">
+
+            <h2 style="color: #D4AF37; font-size: 24px; font-weight: 800; margin-bottom: 20px; letter-spacing: 1px;">
+
+                MAKKAH<span style="color: #fff;">CARS</span>
+
+            </h2>
+
+            <p style="color: #bbb; font-size: 14px; line-height: 1.8; margin: 0;">
+
+                Premium luxury car rental service in Saudi Arabia. Providing professional chauffeur services for Makkah, Madina, and Jeddah since 2010.
+
+            </p>
+
+        </div>
+
+
+
+        <div style="flex: 1; min-width: 200px;">
+            <h3 style="color: #D4AF37; font-size: 18px; margin-bottom: 20px; text-transform: uppercase;">Quick Links</h3>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="margin-bottom: 10px;"><a href="index.html" style="color: #bbb; text-decoration: none; font-size: 14px;">Home</a></li>
+                <li style="margin-bottom: 10px;"><a href="pricing.html" style="color: #bbb; text-decoration: none; font-size: 14px;">Pricing</a></li>
+                <li style="margin-bottom: 10px;"><a href="fleet.html" style="color: #bbb; text-decoration: none; font-size: 14px;">Our Fleet</a></li>
+                <li style="margin-bottom: 10px;"><a href="about.html" style="color: #bbb; text-decoration: none; font-size: 14px;">About Us</a></li>
+                <li style="margin-bottom: 10px;"><a href="contact.html" style="color: #bbb; text-decoration: none; font-size: 14px;">Contact Us</a></li>
+                <li style="margin-bottom: 10px;"><a href="login.html" style="color: #bbb; text-decoration: none; font-size: 14px;">Login</a></li>
+            </ul>
+        </div>
+
+
+
+        <div style="flex: 1; min-width: 250px;">
+
+            <h3 style="color: #D4AF37; font-size: 18px; margin-bottom: 20px; text-transform: uppercase;">Contact Info</h3>
+
+            <p style="color: #bbb; font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+
+                <span>📍</span> Jeddah & Makkah, Saudi Arabia
+
+            </p>
+
+            <p style="color: #bbb; font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+
+                <a href="tel:+9665XXXXXX" style="color: #bbb; text-decoration: none;"><span>📞</span> +966 5XX XXX XXX</a>
+
+            </p>
+
+            <p style="color: #bbb; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+
+                <a href="mailto:info@makkahcars.com" style="color: #bbb; text-decoration: none;"><span>✉️</span> info@makkahcars.com</a>
+
+            </p>
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <div style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #222; color: #666; font-size: 13px;">
+
+        <p>&copy; 2026 Makkah Cars Rental. All Rights Reserved.</p>
+
+    </div>
+
+
+
+</footer>
+
+
+
+  <script>
+
+    const BIN_ID = "695943d043b1c97be916b858";
+
+    const SECRET_KEY = "$2a$10$VtLym.vRu/CpmnieroH6Le4LhHu/H8/CelP2FRwLgHMjRph5K/rVK";
+
+
+
+    async function loadCarsOnline() {
+
+        const container = document.getElementById('carDisplayArea');
+
+        const route = document.getElementById('userRoute').value;
+
+        const date = document.getElementById('bookDate').value || "Not Selected";
+
+
+
+        container.innerHTML = "<p style='color:#D4AF37; text-align:center; grid-column:1/-1;'>Fetching Luxury Fleet...</p>";
+
+
+
+        try {
+
+            let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+
+                headers: { "X-Master-Key": SECRET_KEY }
+
+            });
+
+            let data = await res.json();
+
+            let cars = data.record.cars || [];
+
+            let waPhone = data.record.settings ? data.record.settings.whatsapp : "966500000000";
+
+
+
+            container.innerHTML = "";
+
+            if (cars.length === 0) {
+
+                container.innerHTML = "<p style='color:#fff; text-align:center; grid-column:1/-1;'>No cars available.</p>";
+
+                return;
+
+            }
+
+
+
+            cars.forEach(car => {
+
+                const price = (car.prices && car.prices[route]) ? car.prices[route] : "---";
+
+                const waMsg = encodeURIComponent(`Salam! I want to book:\n🚗 Car: ${car.name}\n📍 Route: ${route}\n💰 Price: ${price} SR\n📅 Date: ${date}`);
+
+
+
+                container.innerHTML += `
+
+                    <div class="service-card" style="background:#111; border:1px solid #333; padding:25px; border-radius:15px; margin-bottom:20px;">
+
+                        <img src="${car.image}" style="width:100%; height:200px; object-fit:cover; border-radius:10px;">
+
+                        <h3 style="color:#fff; margin-top:15px;">${car.name}</h3>
+
+                        <p style="color:#D4AF37; font-size:24px; font-weight:bold; margin:10px 0;">${price} SR</p>
+
+                        <div style="color:#bbb; font-size:14px; margin-bottom:15px;">
+
+                            💺 ${car.seats || 0} Seats | 🧳 ${car.bags || 0} Bags
+
+                        </div>
+
+                        <button onclick="window.location.href = 'https://wa.me/${waPhone}?text=${waMsg}'"
+                                style="background:#25D366; color:white; width:100%; padding:14px; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">
+                            BOOK ON WHATSAPP
+                        </button>
+
+                        <a href="pricing.html?car=${encodeURIComponent(car.name)}" class="check-details-btn">
+                            CHECK DETAILS
+                        </a>
+
+                    </div>`;
+
+            });
+
+        } catch (err) {
+
+            container.innerHTML = "<p style='color:red; text-align:center; grid-column:1/-1;'>Internet connection error.</p>";
+
+        }
+
+    }
+
+
+
+    // Hamburger menu toggle
+    document.querySelector('.hamburger').addEventListener('click', function() {
+        const menu = document.querySelector('.mobile-menu');
+        const mainContent = document.getElementById('main-content');
+        if (menu.classList.contains('open')) {
+            menu.classList.remove('open');
+            mainContent.classList.remove('slide-up');
+        } else {
+            menu.classList.add('open');
+            mainContent.classList.add('slide-up');
+        }
+    });
+
+
+
+    async function updateFloatingWA() {
+        try {
+            let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                headers: { "X-Master-Key": SECRET_KEY }
+            });
+            let data = await res.json();
+            let waPhone = data.record.settings ? data.record.settings.whatsapp : "966500000000";
+            document.getElementById('waFloatingBtn').href = `https://wa.me/${waPhone}`;
+        } catch (e) {
+            document.getElementById('waFloatingBtn').href = `whatsapp://send?phone=966500000000`;
+        }
+    }
+
+    async function updateFavicon() {
+        try {
+            let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                headers: { "X-Master-Key": SECRET_KEY }
+            });
+            let data = await res.json();
+            let iconUrl = data.record.settings && data.record.settings.icon ? data.record.settings.icon : "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=32&h=32&q=80";
+            document.getElementById('favicon').href = iconUrl;
+        } catch (e) {
+            // Keep default icon
+        }
+    }
+
+    window.onload = function() {
+        loadCarsOnline();
+        updateFloatingWA();
+        updateFavicon();
+    };
+
+</script>
+
+
+
+</body>
+
+</html>
