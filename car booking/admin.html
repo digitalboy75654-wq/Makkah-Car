@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Cars & Routes</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #000; color: #fff; padding: 20px; }
+        .admin-box { max-width: 1000px; margin: 0 auto; background: #111; padding: 30px; border: 1px solid #D4AF37; border-radius: 10px; }
+        h2, h3 { color: #D4AF37; margin-bottom: 20px; text-align: center; }
+        input { padding: 12px; border-radius: 5px; border: none; width: 100%; margin-bottom: 15px; background: #fff; color: #000; }
+        .section-label { color: #D4AF37; font-weight: bold; font-size: 14px; margin: 20px 0 10px; display: block; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; background: #222; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .price-item label { font-size: 12px; color: #D4AF37; display: block; margin-bottom: 5px; }
+        .save-btn { width: 100%; background: #D4AF37; color: #000; padding: 15px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 16px; margin-top: 10px; }
+        
+        /* Car List Style */
+        .car-list { margin-top: 50px; border-top: 2px solid #D4AF37; padding-top: 30px; }
+        .car-item { display: flex; align-items: center; background: #1a1a1a; padding: 15px; border-radius: 8px; margin-bottom: 10px; gap: 20px; }
+        .car-item img { width: 80px; height: 50px; object-fit: cover; border-radius: 5px; }
+        .car-info { flex-grow: 1; }
+        .btn-group { display: flex; gap: 10px; }
+        .del-btn { background: #ff4444; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
+        .edit-btn { background: #D4AF37; color: black; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="admin-box">
+    <h2>Admin Panel (Routes & Fleet)</h2>
+    
+    <div style="background: #1a1a1a; padding: 15px; border: 1px dashed #25D366; border-radius: 8px; margin-bottom: 25px;">
+        <span class="section-label" style="margin-top:0;">WhatsApp Settings</span>
+        <input type="text" id="waNum" placeholder="WhatsApp Number (e.g. 966500000000)">
+        <button onclick="updateSettings()" style="background:#25D366; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer; width:100%; font-weight:bold;">UPDATE NUMBER</button>
+    </div>
+
+    <div style="background: #1a1a1a; padding: 15px; border: 1px dashed #D4AF37; border-radius: 8px; margin-bottom: 25px;">
+        <span class="section-label" style="margin-top:0;">Website Icon Settings</span>
+        <input type="file" id="iconFile" accept="image/*">
+        <button onclick="updateIcon()" style="background:#D4AF37; color:black; border:none; padding:10px; border-radius:5px; cursor:pointer; width:100%; font-weight:bold;">UPLOAD ICON</button>
+        <p id="iconStatus" style="text-align:center; margin-top:10px; color:#D4AF37;"></p>
+    </div>
+
+    <span class="section-label">Add/Edit Car</span>
+    <input type="hidden" id="editId">
+    <input type="text" id="name" placeholder="Car Name (e.g. GMC Yukon 2026)">
+    <input type="file" id="photo" accept="image/*">
+    <div style="display:flex; gap:10px;">
+        <input type="number" id="seats" placeholder="Seats">
+        <input type="number" id="bags" placeholder="Bags">
+    </div>
+
+    <span class="section-label">Route Prices (SR)</span>
+    <div class="price-grid" id="routeInputs">
+        </div>
+
+    <button class="save-btn" onclick="saveCar()" id="mainBtn">UPLOAD CAR TO WEBSITE</button>
+    <p id="status" style="text-align:center; margin-top:10px; color:#D4AF37;"></p>
+
+    <div class="car-list">
+        <h3>Manage Existing Fleet</h3>
+        <div id="carListArea">Loading fleet...</div>
+    </div>
+</div>
+
+<script>
+    const BIN_ID = "695943d043b1c97be916b858";
+    const SECRET_KEY = "$2a$10$VtLym.vRu/CpmnieroH6Le4LhHu/H8/CelP2FRwLgHMjRph5K/rVK";
+
+    const routes = [
+        "Jeddah Airport to Makkah Hotel", "Makkah Hotel to Jeddah Airport",
+        "Makkah Hotel to Madina Hotel", "Madina Hotel to Makkah Hotel",
+        "Madina Airport to Madina Hotel", "Madina Hotel to Madina Airport",
+        "Makkah Ziyarat", "Madina Ziyarat", "Jeddah Airport to Madina Hotel",
+        "Jeddah to Taif & Return", "Makkah to Taif & Return (Taif Ziyarat)",
+        "Jeddah Airport to Jeddah Hotel", "Hotel to Train Station", "Train Station to Hotel"
+    ];
+
+    async function updateFavicon() {
+        try {
+            let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                headers: { "X-Master-Key": SECRET_KEY }
+            });
+            let data = await res.json();
+            let iconUrl = data.record.settings && data.record.settings.icon ? data.record.settings.icon : "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=32&h=32&q=80";
+            document.getElementById('favicon').href = iconUrl;
+        } catch (e) {
+            // Keep default icon
+        }
+    }
+
+    // Page Load
+    window.onload = () => {
+        const grid = document.getElementById('routeInputs');
+        routes.forEach(r => {
+            grid.innerHTML += `<div class="price-item"><label>${r}</label><input type="number" class="p-input" data-route="${r}" placeholder="Price for ${r}"></div>`;
+        });
+        refreshData();
+        updateFavicon();
+    };
+
+    async function refreshData() {
+        let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: { "X-Master-Key": SECRET_KEY } });
+        let data = await res.json();
+        
+        // Load WhatsApp
+        if(data.record.settings) document.getElementById('waNum').value = data.record.settings.whatsapp;
+        
+        // Load Car List
+        const listArea = document.getElementById('carListArea');
+        listArea.innerHTML = "";
+        let cars = data.record.cars || [];
+        cars.forEach(car => {
+            listArea.innerHTML += `
+                <div class="car-item">
+                    <img src="${car.image}">
+                    <div class="car-info"><strong>${car.name}</strong></div>
+                    <div class="btn-group">
+                        <button class="edit-btn" onclick="editCar('${car.id}')">Edit</button>
+                        <button class="del-btn" onclick="deleteCar('${car.id}')">Delete</button>
+                    </div>
+                </div>`;
+        });
+    }
+
+    async function saveCar() {
+        const name = document.getElementById('name').value;
+        const editId = document.getElementById('editId').value;
+        const file = document.getElementById('photo').files[0];
+        
+        if(!name) return alert("Enter Car Name");
+
+        document.getElementById('status').innerText = "Uploading... Please wait";
+        
+        let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: { "X-Master-Key": SECRET_KEY } });
+        let data = await res.json();
+        let cars = data.record.cars || [];
+
+        let prices = {};
+        document.querySelectorAll('.p-input').forEach(i => prices[i.dataset.route] = i.value || "0");
+
+        const processSave = (imgData) => {
+            if(editId) {
+                let idx = cars.findIndex(c => c.id == editId);
+                cars[idx] = { ...cars[idx], name, seats: document.getElementById('seats').value, bags: document.getElementById('bags').value, prices, image: imgData || cars[idx].image };
+            } else {
+                cars.push({ id: Date.now(), name, image: imgData, seats: document.getElementById('seats').value, bags: document.getElementById('bags').value, prices });
+            }
+            updateCloud(data.record, cars);
+        };
+
+        if(file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => processSave(e.target.result);
+        } else {
+            processSave(null);
+        }
+    }
+
+    async function deleteCar(id) {
+        if(!confirm("Delete this car?")) return;
+        let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: { "X-Master-Key": SECRET_KEY } });
+        let data = await res.json();
+        data.record.cars = data.record.cars.filter(c => c.id != id);
+        updateCloud(data.record, data.record.cars);
+    }
+
+    async function editCar(id) {
+        let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: { "X-Master-Key": SECRET_KEY } });
+        let data = await res.json();
+        let car = data.record.cars.find(c => c.id == id);
+        
+        document.getElementById('name').value = car.name;
+        document.getElementById('seats').value = car.seats;
+        document.getElementById('bags').value = car.bags;
+        document.getElementById('editId').value = car.id;
+        document.getElementById('mainBtn').innerText = "UPDATE CAR DATA";
+        
+        document.querySelectorAll('.p-input').forEach(i => {
+            i.value = car.prices[i.dataset.route] || "";
+        });
+        window.scrollTo(0,0);
+    }
+
+    async function updateCloud(record, cars) {
+        record.cars = cars;
+        await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: 'PUT', headers: { "Content-Type": "application/json", "X-Master-Key": SECRET_KEY },
+            body: JSON.stringify(record)
+        });
+        location.reload();
+    }
+    
+    async function updateSettings() {
+        const num = document.getElementById('waNum').value;
+        let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: { "X-Master-Key": SECRET_KEY } });
+        let data = await res.json();
+        data.record.settings = { whatsapp: num };
+        updateCloud(data.record, data.record.cars);
+    }
+
+    async function updateIcon() {
+        const file = document.getElementById('iconFile').files[0];
+        if(!file) return alert("Select an icon file");
+
+        document.getElementById('iconStatus').innerText = "Uploading... Please wait";
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = async (e) => {
+            let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: { "X-Master-Key": SECRET_KEY } });
+            let data = await res.json();
+            data.record.settings = { ...data.record.settings, icon: e.target.result };
+            updateCloud(data.record, data.record.cars);
+        };
+    }
+</script>
+</body>
+</html>

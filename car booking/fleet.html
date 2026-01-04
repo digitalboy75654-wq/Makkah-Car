@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Fleet - Makkah Cars Rental</title>
+    <link rel="icon" id="favicon" href="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=32&h=32&q=80" type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #000; color: #fff; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+     .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 8%; background: #000; border-bottom: 2px solid #D4AF37;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 26px; font-weight: 800; color: #D4AF37; text-decoration: none; }
+        .logo span { color: #fff; }
+        .nav-links { display: flex; }
+        .nav-links a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: #D4AF37; }
+
+        /* Hamburger Menu */
+        .hamburger { display: none; flex-direction: column; cursor: pointer; }
+        .hamburger div { width: 25px; height: 3px; background: #fff; margin: 3px 0; transition: 0.3s; }
+        .mobile-menu { position: fixed; top: 50px; right: -50%; width: 50%; height: calc(100vh - 50px); background: #000; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 20px; border-left: 1px solid #D4AF37; transition: right 0.3s; z-index: 1001; }
+        .mobile-menu.open { right: 0; }
+        .mobile-menu a { color: #fff; text-decoration: none; margin: 10px 0; font-weight: 500; transition: 0.3s; text-align: center; }
+        .mobile-menu a:hover { color: #D4AF37; }
+
+        #main-content { transition: transform 0.3s; }
+        #main-content.slide-up { transform: translateY(-20%); }
+
+        /* Hero */
+        .fleet-hero {
+            height: 35vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; border-bottom: 1px solid #222;
+        }
+        .fleet-hero h1 { color: #D4AF37; font-size: 40px; font-weight: 800; text-transform: uppercase; }
+
+        /* Content */
+        .content-wrapper { flex: 1; padding: 60px 8%; }
+        .fleet-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+
+        .car-card { background: #111; border: 1px solid #222; border-radius: 15px; padding: 20px; transition: 0.3s; }
+        .car-card:hover { border-color: #D4AF37; }
+        .car-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
+        .car-card h3 { color: #fff; margin-bottom: 10px; }
+        .book-btn {
+            background: #25D366; color: #fff; border: none; width: 100%;
+            padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;
+            text-decoration: none; display: inline-block; text-align: center; margin-top: 15px;
+        }
+
+        /* --- FOOTER START --- */
+        .main-footer {
+            background: #000;
+            border-top: 2px solid #D4AF37;
+            padding: 60px 8% 20px;
+            color: #fff;
+            margin-top: 60px;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-box { flex: 1; min-width: 250px; }
+        .footer-box h3 { color: #D4AF37; margin-bottom: 20px; text-transform: uppercase; font-size: 18px; }
+        .footer-box p, .footer-box a { color: #bbb; text-decoration: none; font-size: 14px; line-height: 1.8; display: block; }
+        .footer-box ul { list-style: none; }
+        .footer-box li { margin-bottom: 10px; }
+        .footer-box a:hover { color: #D4AF37; }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            font-size: 13px;
+            color: #666;
+        }
+        /* --- FOOTER END --- */
+
+        @media (max-width: 768px) {
+            .footer-container { flex-direction: column; text-align: left; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+
+            /* Ensure date input placeholder is visible on mobile */
+            .pickup-date::placeholder {
+                color: #666 !important;
+                opacity: 1 !important;
+            }
+
+            .pickup-date::-webkit-input-placeholder {
+                color: #666 !important;
+                opacity: 1 !important;
+            }
+
+            .pickup-date::-moz-placeholder {
+                color: #666 !important;
+                opacity: 1 !important;
+            }
+
+            .pickup-date:-ms-input-placeholder {
+                color: #666 !important;
+                opacity: 1 !important;
+            }
+
+            .pickup-date:-moz-placeholder {
+                color: #666 !important;
+                opacity: 1 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="logo">MAKKAH<span>CARS</span></a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="fleet.html" style="color:#D4AF37;">Our Fleet</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="mobile-menu">
+            <a href="index.html">Home</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="fleet.html">Our Fleet</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+    </header>
+
+    <section class="fleet-hero">
+        <h1>Our Premium Fleet</h1>
+        <p style="color: #ccc;">Luxury Cars for Your Sacred Journey</p>
+    </section>
+
+    <div class="content-wrapper">
+        <div class="fleet-grid" id="fleetDisplay">
+            </div>
+    </div>
+
+    <footer style="background: #000; border-top: 2px solid #D4AF37; padding: 60px 8% 30px; margin-top: 50px; color: #fff; clear: both;">
+
+
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto;">
+
+
+
+        <div style="flex: 1; min-width: 280px;">
+
+            <h2 style="color: #D4AF37; font-size: 24px; font-weight: 800; margin-bottom: 20px; letter-spacing: 1px;">
+
+                MAKKAH<span style="color: #fff;">CARS</span>
+
+            </h2>
+
+            <p style="color: #bbb; font-size: 14px; line-height: 1.8; margin: 0;">
+
+                Premium luxury car rental service in Saudi Arabia. Providing professional chauffeur services for Makkah, Madina, and Jeddah since 2010.
+
+            </p>
+
+        </div>
+
+
+
+        <div style="flex: 1; min-width: 200px;">
+            <h3 style="color: #D4AF37; font-size: 18px; margin-bottom: 20px; text-transform: uppercase;">Quick Links</h3>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="margin-bottom: 10px;"><a href="index.html" style="color: #bbb; text-decoration: none; font-size: 14px;">Home</a></li>
+                <li style="margin-bottom: 10px;"><a href="pricing.html" style="color: #bbb; text-decoration: none; font-size: 14px;">Pricing</a></li>
+                <li style="margin-bottom: 10px;"><a href="fleet.html" style="color: #bbb; text-decoration: none; font-size: 14px;">Our Fleet</a></li>
+                <li style="margin-bottom: 10px;"><a href="about.html" style="color: #bbb; text-decoration: none; font-size: 14px;">About Us</a></li>
+                <li style="margin-bottom: 10px;"><a href="contact.html" style="color: #bbb; text-decoration: none; font-size: 14px;">Contact Us</a></li>
+            </ul>
+        </div>
+
+
+
+        <div style="flex: 1; min-width: 250px;">
+
+            <h3 style="color: #D4AF37; font-size: 18px; margin-bottom: 20px; text-transform: uppercase;">Contact Info</h3>
+
+            <p style="color: #bbb; font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+
+                <span>📍</span> Jeddah & Makkah, Saudi Arabia
+
+            </p>
+
+            <p style="color: #bbb; font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+
+                <a href="tel:+9665XXXXXX" style="color: #bbb; text-decoration: none;"><span>📞</span> +966 5XX XXX XXX</a>
+
+            </p>
+
+            <p style="color: #bbb; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+
+                <a href="mailto:info@makkahcars.com" style="color: #bbb; text-decoration: none;"><span>✉️</span> info@makkahcars.com</a>
+
+            </p>
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <div style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #222; color: #666; font-size: 13px;">
+
+        <p>&copy; 2026 Makkah Cars Rental. All Rights Reserved.</p>
+
+    </div>
+
+
+
+</footer>
+
+    <script>
+        const BIN_ID = "695943d043b1c97be916b858";
+        const SECRET_KEY = "$2a$10$VtLym.vRu/CpmnieroH6Le4LhHu/H8/CelP2FRwLgHMjRph5K/rVK";
+
+        async function loadFleet() {
+            const display = document.getElementById('fleetDisplay');
+            display.innerHTML = "<p>Loading Fleet...</p>";
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { "X-Master-Key": SECRET_KEY }
+                });
+                const data = await res.json();
+                const cars = data.record.cars || [];
+                const waPhone = data.record.settings ? data.record.settings.whatsapp : "966500000000";
+
+                display.innerHTML = "";
+                cars.forEach(car => {
+                    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format for input
+                    const displayDate = new Date().toLocaleDateString('en-GB'); // DD/MM/YYYY format for display
+                    display.innerHTML += `
+                        <div class="car-card">
+                            <img src="${car.image}">
+                            <h3>${car.name}</h3>
+                            <p style="color:#bbb; font-size:14px;">💺 ${car.seats} Seats | 🧳 ${car.bags} Bags</p>
+                            <input type="date" class="pickup-date" value="${today}" style="margin-bottom: 5px; width: 100%; padding: 5px; border-radius: 4px; border: 1px solid #333; background: #000; color: #fff;">
+                            <a href="https://wa.me/${waPhone}?text=${encodeURIComponent(`Salam! I want to inquire about: ${car.name}\n📅 Pickup Date: ${displayDate}`)}" target="_blank" class="book-btn" onclick="updateDate(this)">INQUIRE NOW</a>
+                        </div>`;
+                });
+            } catch (err) { display.innerHTML = "<p>Error loading fleet.</p>"; }
+        }
+        function updateDate(link) {
+            const dateInput = link.previousElementSibling;
+            const selectedDate = dateInput.value;
+            const displayDate = new Date(selectedDate).toLocaleDateString('en-GB');
+            const href = link.href;
+            const newHref = href.replace(/📅 Pickup Date: [^)]*/, `📅 Pickup Date: ${displayDate}`);
+            link.href = newHref;
+        }
+
+        async function updateFavicon() {
+            try {
+                let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { "X-Master-Key": SECRET_KEY }
+                });
+                let data = await res.json();
+                let iconUrl = data.record.settings && data.record.settings.icon ? data.record.settings.icon : "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=32&h=32&q=80";
+                document.getElementById('favicon').href = iconUrl;
+            } catch (e) {
+                // Keep default icon
+            }
+        }
+
+        window.onload = function() {
+            loadFleet();
+            updateFavicon();
+            // Hamburger menu toggle
+            document.querySelector('.hamburger').addEventListener('click', function() {
+                const menu = document.querySelector('.mobile-menu');
+                const mainContent = document.getElementById('main-content');
+                if (menu.classList.contains('open')) {
+                    menu.classList.remove('open');
+                    mainContent.classList.remove('slide-up');
+                } else {
+                    menu.classList.add('open');
+                    mainContent.classList.add('slide-up');
+                }
+            });
+        };
+    </script>
+</body>
+</html>
