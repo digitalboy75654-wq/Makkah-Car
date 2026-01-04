@@ -1,0 +1,306 @@
+/* --- GLASSY SEARCH BAR EFFECT --- */
+.search-container {
+    background: rgba(255, 255, 255, 0.1); /* White transparency */
+    backdrop-filter: blur(15px); /* Shishe jaisa blur effect */
+    -webkit-backdrop-filter: blur(15px); /* Safari support */
+    border: 1px solid rgba(212, 175, 55, 0.4); /* Halka golden border */
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Shadow for depth */
+}
+
+/* Input boxes ko bhi thoda transparent look dene ke liye */
+.input-group input, .input-group select {
+    background: rgba(255, 255, 255, 0.9); /* Pure white ke bajaye halka transparent */
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 5px;
+    width: 200px;
+    outline: none;
+    color: #333;
+}
+
+.search-btn {
+    background: #D4AF37;
+    color: #000;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: 0.3s;
+}
+
+.search-btn:hover {
+    background: #fff;
+    box-shadow: 0 0 15px #D4AF37;
+}
+/* --- MOBILE RESPONSIVE RULES --- */
+@media (max-width: 768px) {
+    /* Header ko mobile ke liye adjust karein */
+    .navbar {
+        padding: 15px 5%;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .nav-links a {
+        margin: 0 5px;
+        font-size: 14px;
+    }
+
+    /* Hero Section ki height kam karein */
+    .hero {
+        height: auto;
+        padding: 50px 20px;
+    }
+
+    .hero-main-title {
+        font-size: 28px; /* Mobile par chota font */
+    }
+
+    /* Search Bar ko mobile par vertical karein */
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .input-group input, .input-group select {
+        width: 100%; /* Full width inputs */
+    }
+
+    .search-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Services cards ko adjust karein */
+    .services-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+.back-arrow {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: #D4AF37;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-arrow:hover {
+    color: #fff;
+    transform: translateX(-5px);
+}
+@media (max-width: 768px) {
+    /* Hero Title chota karein */
+    .hero-main-title {
+        font-size: 24px !important;
+        padding: 0 10px;
+    }
+
+    /* Search Bar ko vertical line mein karein */
+    .search-container {
+        flex-direction: column;
+        width: 95% !important;
+        padding: 20px !important;
+        gap: 10px;
+    }
+
+    .input-group, .input-group input, .input-group select {
+        width: 100% !important; /* Mobile par full width */
+    }
+
+    .search-btn {
+        width: 100% !important;
+    }
+}
+
+/* Footer Fix */
+.footer {
+    background: #000;
+    border-top: 2px solid #D4AF37;
+    padding: 50px 8% 20px;
+    margin-top: 50px;
+    clear: both; /* Kisi bhi floating element ko clear karne ke liye */
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr; /* 3 Columns layout */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-box h3 {
+    color: #D4AF37;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.footer-box p, .footer-box a {
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.8;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.footer-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-box a:hover {
+    color: #D4AF37;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #222;
+    font-size: 13px;
+    color: #666;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* Mobile par ek ke niche ek */
+        text-align: left;
+    }
+}
+/* Hamburger Menu */
+.hamburger { 
+    display: none; 
+    flex-direction: column; 
+    cursor: pointer; 
+    z-index: 1001;
+}
+
+.hamburger div { 
+    width: 25px; 
+    height: 3px; 
+    background: #fff; 
+    margin: 3px 0; 
+    transition: 0.3s; 
+}
+
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #000; /* Solid black background */
+    flex-direction: column;
+    padding: 20px;
+    border-top: 1px solid #D4AF37;
+    border-bottom: 2px solid #D4AF37; /* نیچے بھی گولڈن لائن */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* ہلکا سا شیڈو */
+}
+
+.mobile-menu a { 
+    color: #ffffff; /* سفید رنگ تصویر کے مطابق */
+    text-decoration: none; 
+    margin: 12px 0; 
+    font-weight: 500; 
+    transition: 0.3s; 
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+
+.mobile-menu a:hover { 
+    color: #D4AF37; /* ہوور پر گولڈن رنگ */
+    background: rgba(212, 175, 55, 0.1); /* ہلکا گولڈن بیک گراؤنڈ */
+}
+
+/* مینو میں Login بٹن کے لیے الگ سٹائل */
+.mobile-menu .login-btn {
+    background: #D4AF37;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.mobile-menu .login-btn:hover {
+    background: #c19b2d;
+    color: #000;
+}
+
+/* ہیمبرگر کو X بنانے کی انیمیشن */
+.hamburger.active .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+    background: #D4AF37; /* X کا رنگ گولڈن */
+}
+
+.hamburger.active .line2 {
+    opacity: 0;
+}
+
+.hamburger.active .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+    background: #D4AF37; /* X کا رنگ گولڈن */
+}
+
+/* ریسپانسیو ڈیزائن */
+@media screen and (max-width: 992px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .mobile-menu {
+        display: flex;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}

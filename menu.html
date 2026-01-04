@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Makkah Cars</title>
+    <link rel="icon" id="favicon" href="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=32&h=32&q=80" type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #000; color: #fff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .logo { font-size: 32px; font-weight: 800; color: #D4AF37; text-decoration: none; letter-spacing: 1px; margin-bottom: 50px; }
+        .logo span { color: #fff; }
+        .menu-buttons { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+        .menu-btn { background: #D4AF37; color: #000; border: none; padding: 15px 40px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none; font-size: 18px; text-transform: uppercase; }
+        .menu-btn:hover { background: #fff; }
+        .back-btn { position: absolute; top: 20px; left: 20px; background: #333; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="history.back()">Back</button>
+    <a href="index.html" class="logo">MAKKAH<span>CARS</span></a>
+    <div class="menu-buttons">
+        <a href="index.html" class="menu-btn">Home</a>
+        <a href="pricing.html" class="menu-btn">Pricing</a>
+        <a href="fleet.html" class="menu-btn">Our Fleet</a>
+        <a href="about.html" class="menu-btn">About Us</a>
+        <a href="contact.html" class="menu-btn">Contact Us</a>
+        <a href="login.html" class="menu-btn">Login</a>
+    </div>
+
+    <script>
+        const BIN_ID = "695943d043b1c97be916b858";
+        const SECRET_KEY = "$2a$10$VtLym.vRu/CpmnieroH6Le4LhHu/H8/CelP2FRwLgHMjRph5K/rVK";
+
+        async function updateFavicon() {
+            try {
+                let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { "X-Master-Key": SECRET_KEY }
+                });
+                let data = await res.json();
+                let iconUrl = data.record.settings && data.record.settings.icon ? data.record.settings.icon : "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=32&h=32&q=80";
+                document.getElementById('favicon').href = iconUrl;
+            } catch (e) {
+                // Keep default icon
+            }
+        }
+
+        window.onload = function() {
+            updateFavicon();
+        };
+    </script>
+</body>
+</html>
