@@ -75,9 +75,9 @@
 
         /* --- HERO SECTION --- */
 
-        .hero {
+       /* Hero section ka purana code */
+.hero {
     height: 90vh;
-    /* Purane link ki jagah folder path likhein */
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), 
                 url('images/hero.jpg'); 
     background-size: cover; 
@@ -87,6 +87,15 @@
     justify-content: center; 
     align-items: center; 
     text-align: center;
+}
+
+/* --- MOBILE VIEW FIX --- */
+@media (max-width: 768px) {
+    .hero {
+        height: 50vh; /* Mobile par height kam kar dein taaki image zyada na khinche */
+        background-position: center top; /* Image ka main hissa (gaari ya haram) upar se dikhe */
+        background-attachment: scroll; /* Mobile browsers par smooth rendering ke liye */
+    }
 }
 
 
@@ -799,6 +808,7 @@ cars.forEach(car => {
 
 
 </html>
+
 
 
 
