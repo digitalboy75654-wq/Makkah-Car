@@ -335,55 +335,121 @@
 
         
 
-        <div class="search-container">
+        <style>
+    /* --- LUXURY GLASS CONTAINER (SINGLE LINE) --- */
+    .search-container {
+        background: rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 193, 7, 0.4);
+        padding: 8px 15px;
+        border-radius: 50px; 
+        display: flex;
+        flex-direction: row; 
+        align-items: center;
+        gap: 10px;
+        width: 98%;
+        max-width: 1000px;
+        margin: 20px auto;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
 
-            <div class="input-group">
+    /* --- INPUT GROUPS --- */
+    .input-group {
+        display: flex;
+        flex-direction: column; /* Label upar, input niche */
+        flex: 1;
+        padding: 2px 10px;
+        border-right: 1px solid rgba(255, 193, 7, 0.2); /* Divider line */
+    }
 
-                <label>PICKUP & DROP ROUTE</label>
+    .input-group:last-of-type {
+        border-right: none;
+    }
 
-                <select id="userRoute" onchange="loadCarsOnline()">
+    /* --- GOLDEN BOLD LABELS --- */
+    .input-group label {
+        color: #ffc107;
+        font-size: 9px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 2px;
+    }
 
-    <option value="Jeddah Airport to Makkah Hotel">Jeddah Airport to Makkah Hotel</option>
+    .input-group select, .input-group input {
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 11px;
+        font-weight: 600;
+        color: #fff;
+        width: 100%;
+        cursor: pointer;
+    }
 
-    <option value="Makkah Hotel to Jeddah Airport">Makkah Hotel to Jeddah Airport</option>
+    /* --- LUXURY BUTTON --- */
+    .search-btn {
+        background: linear-gradient(145deg, #ffc107, #b8860b);
+        color: #000;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 40px;
+        font-weight: 800;
+        font-size: 11px;
+        cursor: pointer;
+        transition: 0.4s;
+        text-transform: uppercase;
+        flex-shrink: 0;
+        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    }
 
-    <option value="Makkah Hotel to Madina Hotel">Makkah Hotel to Madina Hotel</option>
+    .search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+    }
 
-    <option value="Madina Hotel to Makkah Hotel">Madina Hotel to Makkah Hotel</option>
+    /* --- MOBILE OPTIMIZATION (STRICT LINE) --- */
+    @media (max-width: 600px) {
+        .search-container {
+            padding: 5px 10px;
+            gap: 5px;
+        }
+        .input-group {
+            padding: 2px 5px;
+        }
+        .input-group label {
+            font-size: 8px; /* Mobile par thoda chota */
+        }
+        .input-group select, .input-group input {
+            font-size: 10px;
+        }
+        .search-btn {
+            padding: 8px 12px;
+            font-size: 10px;
+        }
+    }
+</style>
 
-    <option value="Madina Airport to Madina Hotel">Madina Airport to Madina Hotel</option>
+<div class="search-container">
+    <div class="input-group">
+        <label>SELECT ROUTE</label>
+        <select id="userRoute" onchange="loadCarsOnline()">
+            <option value="Jeddah Airport to Makkah Hotel">Jeddah to Makkah</option>
+            <option value="Makkah Hotel to Madina Hotel">Makkah to Madina</option>
+            <option value="Makkah Ziyarat">Makkah Ziyarat</option>
+            </select>
+    </div>
 
-    <option value="Madina Hotel to Madina Airport">Madina Hotel to Madina Airport</option>
+    <div class="input-group">
+        <label>SELECT DATE</label>
+        <input type="date" id="bookDate">
+    </div>
 
-    <option value="Makkah Ziyarat">Makkah Ziyarat</option>
-
-    <option value="Madina Ziyarat">Madina Ziyarat</option>
-
-    <option value="Jeddah Airport to Madina Hotel">Jeddah Airport to Madina Hotel</option>
-
-    <option value="Jeddah to Taif & Return">Jeddah to Taif & Return</option>
-
-    <option value="Makkah to Taif & Return (Taif Ziyarat)">Makkah to Taif & Return (Taif Ziyarat)</option>
-
-    <option value="Jeddah Airport to Jeddah Hotel">Jeddah Airport to Jeddah Hotel</option>
-
-    <option value="Hotel to Train Station">Hotel to Train Station</option>
-
-    <option value="Train Station to Hotel">Train Station to Hotel</option>
-
-</select>
-
-            </div>
-
-            <div class="input-group">
-
-                <label>PICKUP DATE</label>
-
-                <input type="date" id="bookDate" placeholder="mm/dd/yyyy">
-
-            </div>
-
-            <button class="search-btn" onclick="renderCars()">SEARCH CAR</button>
+    <button class="search-btn" onclick="loadCarsOnline(); document.getElementById('available-fleet').scrollIntoView({behavior: 'smooth'})">
+        SEARCH
+    </button>
+</div>
   </div> </section> <section class="services-section" id="available-fleet" style="margin-top: 50px; clear: both; background: #000;">
         <h2 class="services-title">Available Fleet</h2>
         <div class="services-grid" id="carDisplayArea">
@@ -801,6 +867,7 @@ cars.forEach(car => {
 
 
 </html>
+
 
 
 
