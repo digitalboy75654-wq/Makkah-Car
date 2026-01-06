@@ -27,7 +27,7 @@
 }
 
 .search-btn {
-    background: #D4AF37;
+    background: #ffc107;
     color: #000;
     border: none;
     padding: 12px 40px;
@@ -40,7 +40,7 @@
 
 .search-btn:hover {
     background: #fff;
-    box-shadow: 0 0 15px #D4AF37;
+    box-shadow: 0 0 15px #ffc107;
 }
 /* --- MOBILE RESPONSIVE RULES --- */
 @media (max-width: 768px) {
@@ -106,7 +106,7 @@
     position: absolute;
     top: 15px;
     left: 20px;
-    color: #D4AF37;
+    color: #ffc107;
     font-size: 24px;
     cursor: pointer;
     transition: 0.3s;
@@ -143,7 +143,7 @@
 /* Footer Fix */
 .footer {
     background: #000;
-    border-top: 2px solid #D4AF37;
+    border-top: 2px solid #ffc107;
     padding: 50px 8% 20px;
     margin-top: 50px;
     clear: both; /* Kisi bhi floating element ko clear karne ke liye */
@@ -158,7 +158,7 @@
 }
 
 .footer-box h3 {
-    color: #D4AF37;
+    color: #ffc107;
     font-size: 18px;
     margin-bottom: 20px;
     text-transform: uppercase;
@@ -179,7 +179,7 @@
 }
 
 .footer-box a:hover {
-    color: #D4AF37;
+    color: #ffc107;
 }
 
 .footer-bottom {
@@ -223,8 +223,8 @@
     background: #000; /* Solid black background */
     flex-direction: column;
     padding: 20px;
-    border-top: 1px solid #D4AF37;
-    border-bottom: 2px solid #D4AF37; /* نیچے بھی گولڈن لائن */
+    border-top: 1px solid #ffc107;
+    border-bottom: 2px solid #ffc107; /* نیچے بھی گولڈن لائن */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* ہلکا سا شیڈو */
 }
 
@@ -240,13 +240,13 @@
 }
 
 .mobile-menu a:hover { 
-    color: #D4AF37; /* ہوور پر گولڈن رنگ */
+    color: #ffc107; /* ہوور پر گولڈن رنگ */
     background: rgba(212, 175, 55, 0.1); /* ہلکا گولڈن بیک گراؤنڈ */
 }
 
 /* مینو میں Login بٹن کے لیے الگ سٹائل */
 .mobile-menu .login-btn {
-    background: #D4AF37;
+    background: #ffc107;
     color: #000;
     border: none;
     padding: 10px 20px;
@@ -268,7 +268,7 @@
 /* ہیمبرگر کو X بنانے کی انیمیشن */
 .hamburger.active .line1 {
     transform: rotate(-45deg) translate(-5px, 6px);
-    background: #D4AF37; /* X کا رنگ گولڈن */
+    background: #ffc107; /* X کا رنگ گولڈن */
 }
 
 .hamburger.active .line2 {
@@ -277,7 +277,7 @@
 
 .hamburger.active .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
-    background: #D4AF37; /* X کا رنگ گولڈن */
+    background: #ffc107; /* X کا رنگ گولڈن */
 }
 
 /* ریسپانسیو ڈیزائن */
@@ -303,4 +303,5 @@
         visibility: visible;
         transform: translateY(0);
     }
+
 }
