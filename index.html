@@ -744,7 +744,17 @@
 
                 const price = (car.prices && car.prices[route]) ? car.prices[route] : "---";
 
-                const waMsg = encodeURIComponent(`Salam! I want to book:\n🚗 Car: ${car.name}\n📍 Route: ${route}\n💰 Price: ${price} SR\n📅 Date: ${date}`);
+                const waMsg = encodeURIComponent(`*✨ LUXURY BOOKING REQUEST ✨*
+
+━━━━━━━━━━━━━━━━━━━
+🚖 \`*CAR TYPE:* ${car.name}\`
+📍 \`*ROUTE:* ${route}\`
+📅 \`*DATE:* ${date}\`
+💰 \`*TOTAL PRICE:* ${price} SR\`
+━━━━━━━━━━━━━━━━━━━
+
+*Assalam-o-Alaikum,*
+I would like to confirm this booking. Please check availability.`);
 
 
 
@@ -754,7 +764,17 @@ container.innerHTML = "";
 // 2. Loop ke andar card add karein
 cars.forEach(car => {
     const price = (car.prices && car.prices[route]) ? car.prices[route] : "---";
-    const waMsg = encodeURIComponent(`Salam! I want to book:\n🚗 Car: ${car.name}\n📍 Route: ${route}\n💰 Price: ${price} SR\n📅 Date: ${date}`);
+   const waMsg = encodeURIComponent(`*✨ LUXURY BOOKING REQUEST ✨*
+
+━━━━━━━━━━━━━━━━━━━
+🚖 \`*CAR TYPE:* ${car.name}\`
+📍 \`*ROUTE:* ${route}\`
+📅 \`*DATE:* ${date}\`
+💰 \`*TOTAL PRICE:* ${price} SR\`
+━━━━━━━━━━━━━━━━━━━
+
+*Assalam-o-Alaikum,*
+I would like to confirm this booking. Please check availability.`);
 
     container.innerHTML += `
         <div class="service-card" style="
@@ -893,6 +913,7 @@ cars.forEach(car => {
 
 
 </html>
+
 
 
 
