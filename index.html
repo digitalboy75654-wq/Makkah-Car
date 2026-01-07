@@ -13,52 +13,85 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 <div id="multiChatWrapper" style="position: fixed !important; bottom: 30px !important; right: 30px !important; z-index: 99999 !important; display: flex; flex-direction: column; align-items: flex-end; gap: 15px;">
-    
-    <div id="chatSubMenu" style="display: none; flex-direction: column; gap: 15px; align-items: flex-end; padding: 15px; border-radius: 20px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);">
-        
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="background: rgba(0,0,0,0.6); color: white; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 500;">Email Us</span>
-            <a href="mailto:info@makkahcars.com" style="background:#ea4335; width:45px; height:45px; border-radius:50%; display:flex; justify-content:center; align-items:center; text-decoration:none; color:#fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">✉️</a>
-        </div>
+    
+    <div id="chatSubMenu" style="display: none; flex-direction: column; gap: 12px; align-items: flex-end;">
+        
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 5px; font-size: 13px; border: 1px solid #444;">Email Us</span>
+            <a href="mailto:info@makkahcars.com" style="background:#ea4335; width:45px; height:45px; border-radius:50%; display:flex; justify-content:center; align-items:center; text-decoration:none; color:#fff; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">✉️</a>
+        </div>
 
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="background: rgba(0,0,0,0.6); color: white; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 500;">Call Now</span>
-            <a href="tel:+966500000000" style="background:#007bff; width:45px; height:45px; border-radius:50%; display:flex; justify-content:center; align-items:center; text-decoration:none; color:#fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">📞</a>
-        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 5px; font-size: 13px; border: 1px solid #444;">Call Now</span>
+            <a href="tel:+966500000000" style="background:#007bff; width:45px; height:45px; border-radius:50%; display:flex; justify-content:center; align-items:center; text-decoration:none; color:#fff; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">📞</a>
+        </div>
 
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="background: rgba(0,0,0,0.6); color: white; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 500;">WhatsApp</span>
-            <a id="waFloatingBtn" href="https://wa.me/966500000000" target="_blank" style="background:#25D366; width:45px; height:45px; border-radius:50%; display:flex; justify-content:center; align-items:center; text-decoration:none; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width: 25px; height: 25px;" alt="WA">
-            </a>
-        </div>
-    </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 5px; font-size: 13px; border: 1px solid #444;">WhatsApp</span>
+            <a id="waFloatingBtn" href="https://wa.me/966500000000" target="_blank" style="background:#25D366; width:45px; height:45px; border-radius:50%; display:flex; justify-content:center; align-items:center; text-decoration:none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width: 25px; height: 25px;" alt="WA">
+            </a>
+        </div>
+    </div>
 
-    <div onclick="toggleChatActions(event)" id="mainGlowBtn" style="width: 65px; height: 65px; background-color: #ffc107; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 28px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: none; outline: none; z-index: 100000;">
-        💬
-    </div>
+    <div onclick="toggleChatActions(event)" id="mainGlowBtn" style="width: 65px; height: 65px; background-color: #ffc107; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 28px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: none; outline: none; z-index: 100000;">
+        💬
+    </div>
 </div>
 
 <style>
-    /* Glow Animation */
-    #mainGlowBtn { animation: glow-pulse-amber 2s infinite; }
-    @keyframes glow-pulse-amber {
-        0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
-        70% { box-shadow: 0 0 0 15px rgba(255, 193, 7, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
-    }
+    /* Glow Animation for Main Button */
+    #mainGlowBtn { animation: glow-pulse-amber 2s infinite; }
+    
+    @keyframes glow-pulse-amber {
+        0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+        70% { box-shadow: 0 0 0 15px rgba(255, 193, 7, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+    }
 
-    /* Glass Menu Animation */
-    #chatSubMenu.active-menu {
-        display: flex !important;
-        animation: glass-pop 0.3s ease-out forwards;
-    }
+    /* Menu appearance animation */
+    #chatSubMenu.active-menu {
+        display: flex !important;
+        animation: pop-up-labels 0.3s ease-out forwards;
+    }
 
-    @keyframes glass-pop {
-        from { opacity: 0; transform: scale(0.8) translateY(20px); }
-        to { opacity: 1; transform: scale(1) translateY(0); }
-    }
+    @keyframes pop-up-labels {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 </style>
+
+<script>
+    // JSONbin Config (Dynamic WhatsApp Number)
+    const BIN_ID_CHAT = "695943d043b1c97be916b858"; 
+    const SECRET_KEY_CHAT = "$2a$10$VtLym.vRu/CpmnieroH6Le4LhHu/H8/CelP2FRwLgHMjRph5K/rVK";
+
+    function toggleChatActions(event) {
+        event.stopPropagation();
+        const menu = document.getElementById('chatSubMenu');
+        menu.classList.toggle('active-menu');
+    }
+
+    // Close when clicking outside
+    document.addEventListener('click', function() {
+        document.getElementById('chatSubMenu').classList.remove('active-menu');
+    });
+
+    // Sync WhatsApp number from Admin Panel
+    async function syncWhatsAppLink() {
+        try {
+            let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID_CHAT}/latest`, {
+                headers: { "X-Master-Key": SECRET_KEY_CHAT }
+            });
+            let data = await res.json();
+            let waPhone = data.record.settings ? data.record.settings.whatsapp : "966500000000";
+            document.getElementById('waFloatingBtn').href = `https://wa.me/${waPhone}`;
+        } catch (e) {
+            console.error("WhatsApp sync failed.");
+        }
+    }
+    syncWhatsAppLink();
+</script>
     <style>
 
 
@@ -989,6 +1022,7 @@ I would like to confirm this booking. Please check availability.`);
 
 
 </html>
+
 
 
 
