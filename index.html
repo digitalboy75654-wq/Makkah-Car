@@ -906,35 +906,14 @@ I would like to confirm this booking. Please check availability.`);
     };
 
 </script>
-<script>
-    // Page load hotay hi aaj ki date set karne ke liye
-    window.onload = function() {
-        const dateInput = document.getElementById('bookDate');
-        const today = new Date();
-        
-        // Date ko YYYY-MM-DD format mein convert karna
-        const yyyy = today.getFullYear();
-        let mm = today.getMonth() + 1; // Months 0 se shuru hotay hain
-        let dd = today.getDate();
 
-        if (dd < 10) dd = '0' + dd;
-        if (mm < 10) mm = '0' + mm;
-
-        const formattedToday = yyyy + '-' + mm + '-' + dd;
-        
-        // Input bar mein aaj ki date set karna
-        dateInput.value = formattedToday;
-        
-        // User ko purani date select karne se rokne ke liye (Optional)
-        dateInput.setAttribute('min', formattedToday);
-    };
-</script>
 
 
 </body>
 
 
 </html>
+
 
 
 
