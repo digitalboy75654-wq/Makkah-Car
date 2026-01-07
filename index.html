@@ -906,13 +906,40 @@ I would like to confirm this booking. Please check availability.`);
     };
 
 </script>
+<script>
+    window.onload = function() {
+        const dateInput = document.getElementById('bookDate');
+        const today = new Date();
+        
+        // Date Format: YYYY-MM-DD
+        const yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1; 
+        let dd = today.getDate();
 
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        const formattedToday = yyyy + '-' + mm + '-' + dd;
+        
+        // 1. Date set karein
+        dateInput.value = formattedToday;
+        dateInput.setAttribute('min', formattedToday);
+
+        // 2. Cars ko auto-load karein (Ye line missing thi)
+        if (typeof loadCarsOnline === "function") {
+            loadCarsOnline(); 
+        } else if (typeof renderCars === "function") {
+            renderCars();
+        }
+    };
+</script>
 
 
 </body>
 
 
 </html>
+
 
 
 
